@@ -5,6 +5,10 @@ LINE = "Good news: the deploy worked perfectly. Bad news: it deployed the versio
 
 def main():
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+    if not 1 <= len(LINE) <= 180:
+        raise ValueError(
+            f"entry line must be 1-180 characters, got {len(LINE)}"
+        )
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
     with open(path, "wb") as f:
